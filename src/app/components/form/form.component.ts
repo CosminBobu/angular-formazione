@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Person } from 'src/app/obj/person';
+import { Person } from '../../obj/person';
 
 @Component({
   selector: 'app-form',
