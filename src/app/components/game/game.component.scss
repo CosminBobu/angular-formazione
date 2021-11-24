@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+}
+
+.gioco {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    margin: 0;
+    background-color: cyan;
+}
+
+body,
+.quote-input,
+#title {
+    font-family: 'Gill Sans', 'Gill Sans MT', calibri, 'Trebuchet MS', sans-serif;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: purple;
+    margin: 0;
+}
+
+textarea {
+    height: 10rem;
+    width: 40rem;
+}
+
+.container {
+    background-color: yellow;
+    padding: 1rem;
+    border-radius: .5rem;
+    width: 680px;
+    max-width: 90%;
+}
+
+.quote-display {
+    margin-bottom: 1rem;
+}
+
+.quote-input {
+    width: 100%;
+    background-color: transparent;
+    border: 2px solid black;
+}
