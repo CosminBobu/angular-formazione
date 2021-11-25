@@ -1,13 +1,38 @@
 <h1 class="title">Welcom to my speed typing game!!!</h1>
-<h1 class="title"> Parole corrette {{ counter }} </h1>
-<div class="gioco">
+<h2 class="title">Parole corrette {{ counter }}</h2>
+<h3 class="title">
+  <button (click)="changeTheme()" class="btn btn-primary">change theme</button>
+</h3>
+
+<ng-template #light>
+  <div class="gioco">
     <div class="container">
-        <ng-container *ngIf="posts.length !== 0">
-            <ng-container *ngFor="let words of quote.split(' ')">
-                <span> {{ words }}</span>
-            </ng-container>
+      <ng-container *ngIf="posts.length !== 0">
+        <ng-container *ngFor="let words of quote.split(' ')">
+          <span> {{ words }}</span>
         </ng-container>
-        <textarea class="quote-input" id="quoteInput" #quoteInput></textarea>
-        <button (click)="onStart()" class="btn btn-primary">Start</button>
+      </ng-container>
+      <textarea class="quote-input" id="quoteInput" #quoteInput></textarea>
+      <button (click)="onStart()" class="btn btn-primary">Start</button>
     </div>
-</div>
+  </div>
+</ng-template>
+
+<ng-template #dark>
+  <div class="giocoD">
+    <div class="container">
+      <ng-container *ngIf="posts.length !== 0">
+        <ng-container *ngFor="let words of quote.split(' ')">
+          <span> {{ words }}</span>
+        </ng-container>
+      </ng-container>
+      <textarea class="quote-input" id="quoteInput" #quoteInput></textarea>
+      <button (click)="onStart()" class="btn btn-primary">Start</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #default>
+  <div>In attesa che il giocatore scelga un tema</div>
+</ng-template>
+<ng-content *ngTemplateOutlet="theme || light"></ng-content>

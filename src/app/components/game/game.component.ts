@@ -4,6 +4,7 @@ import {
   ElementRef,
   OnDestroy,
   OnInit,
+  TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
@@ -20,15 +21,18 @@ export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
   posts: post[] = [];
   quote: string = '';
   phrase: string = '';
-  subscribtions: Subscription[] = [];
+  subscriptions: Subscription[] = [];
   counter: number = 0;
+  theme: TemplateRef<HTMLElement>;
 
   @ViewChild('quoteInput') input: ElementRef<any> = new ElementRef(null);
+  @ViewChild('light') light: TemplateRef<HTMLElement>;
+  @ViewChild('dark') dark: TemplateRef<HTMLElement>;
 
   constructor(public postService: PostService) {}
 
   ngOnInit(): void {
-    this.subscribtions.push(
+    this.subscriptions.push(
       this.postService
         .get('https://jsonplaceholder.typicode.com/posts')
         .pipe(mergeAll())
@@ -45,6 +49,7 @@ export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
         map((data) => (this.phrase = data))
       )
       .subscribe((_) => this.checkPhrase());
+    this.theme = this.light;
   }
 
   onStart() {
@@ -77,9 +82,12 @@ export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  changeTheme() {
+    if (this.theme === this.light) this.theme = this.dark;
+    else this.theme = this.light;
+  }
+
   ngOnDestroy() {
-    for (let i = 0; i < this.subscribtions.length; i++) {
-      this.subscribtions[i].unsubscribe;
-    }
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe);
   }
 }
