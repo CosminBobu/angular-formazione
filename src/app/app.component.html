@@ -1,2 +1,15 @@
+<ng-template #home>
+  <section class="hero is-link is-fullheight-with-navbar">
+    <div class="hero-body">
+      <p class="title">
+        Welcome to my app, press the buttons on the header above and scroll down
+        to see the other parts!!
+      </p>
+    </div>
+  </section>
+</ng-template>
+
 <app-header></app-header>
+<app-home [homeTemplate]="home"></app-home>
+<hr />
 <router-outlet></router-outlet>
