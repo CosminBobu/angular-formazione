@@ -1,11 +1,23 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.get('username').value)">
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" formControlName="username" class="form-control">
-        <span *ngIf="!myForm.get('username').valid && myForm.get('username').touched" class="help-block"> 
-            Please insert a valid username 
-        </span>
-    </div>
-    <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">edit username</button>
-    <button class="btn btn-primary" type="button" (click)="onClick()">show old username</button>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" formControlName="username" class="form-control" />
+    <span
+      *ngIf="!myForm.get('username').valid && myForm.get('username').touched"
+      class="help-block"
+    >
+      Please insert a valid username
+    </span>
+  </div>
+  <button
+    appHighlight
+    class="btn btn-primary"
+    type="submit"
+    [disabled]="!myForm.valid"
+  >
+    edit username
+  </button>
+  <button class="btn btn-primary" type="button" (click)="onClick()">
+    show old username
+  </button>
 </form>
