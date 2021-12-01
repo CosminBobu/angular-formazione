@@ -41,6 +41,11 @@ export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
+    this.theme = this.light;
+  }
+
+  onStart() {
+    this.quote = this.posts[this.postService.randomNum()].title;
     fromEvent<any>(this.input.nativeElement, 'keyup')
       .pipe(
         map((data) => data.target.value),
@@ -49,11 +54,6 @@ export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
         map((data) => (this.phrase = data))
       )
       .subscribe((_) => this.checkPhrase());
-    this.theme = this.light;
-  }
-
-  onStart() {
-    this.quote = this.posts[this.postService.randomNum()].title;
   }
 
   onFinish() {
@@ -64,6 +64,7 @@ export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
         'Peccato sembra che tu abbia fatto degli errori, premere start per riprovare'
       );
     }
+    this.quote = '';
     this.input.nativeElement.value = '';
   }
 
@@ -83,6 +84,7 @@ export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   changeTheme() {
+    this.quote = '';
     if (this.theme === this.light) this.theme = this.dark;
     else this.theme = this.light;
   }
