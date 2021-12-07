@@ -10,6 +10,5 @@
 </ng-template>
 
 <app-header></app-header>
-<app-home [homeTemplate]="home"></app-home>
-<hr />
+<app-home [homeTemplate]="home" *ngIf="display"></app-home>
 <router-outlet></router-outlet>
