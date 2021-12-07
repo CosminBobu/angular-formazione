@@ -11,6 +11,7 @@ import { FormComponent } from './components/form/form.component';
 import { HomeComponent } from './components/home/home.component';
 import { EditFormComponent } from './components/edit-form/edit-form.component';
 import { HighlightDirective } from './directives/highlight.directive';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HighlightDirective } from './directives/highlight.directive';
     HomeComponent,
     EditFormComponent,
     HighlightDirective,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,
