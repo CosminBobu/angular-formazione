@@ -65,6 +65,7 @@ export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
     alert('Complimenti hai digitato ' + this.counter + ' in un minuto');
     this.quote = '';
     this.input.nativeElement.value = '';
+    this.timeLeft = 60;
   }
 
   checkPhrase() {
