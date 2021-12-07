@@ -87,6 +87,8 @@ export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
 
   changeTheme() {
     this.quote = '';
+    clearInterval(this.interval);
+    this.timeLeft = 60;
     if (this.theme === this.light) this.theme = this.dark;
     else this.theme = this.light;
   }
