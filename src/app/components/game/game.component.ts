@@ -24,6 +24,8 @@ export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
   subscriptions: Subscription[] = [];
   counter: number = 0;
   theme: TemplateRef<HTMLElement>;
+  timeLeft: number = 60;
+  interval: number;
 
   @ViewChild('quoteInput') input: ElementRef<any> = new ElementRef(null);
   @ViewChild('light') light: TemplateRef<HTMLElement>;
@@ -45,41 +47,41 @@ export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onStart() {
+    this.input.nativeElement.value = '';
     this.quote = this.posts[this.postService.randomNum()].title;
     fromEvent<any>(this.input.nativeElement, 'keyup')
       .pipe(
         map((data) => data.target.value),
-        tap((data) => console.log(data)),
         debounceTime(50),
         map((data) => (this.phrase = data))
       )
       .subscribe((_) => this.checkPhrase());
+    if (this.timeLeft == 60) {
+      this.startTimer();
+    }
   }
 
   onFinish() {
-    if (this.phrase === this.quote) {
-      alert('Complimenti hai vinto, premere start per una nuova partita');
-    } else {
-      alert(
-        'Peccato sembra che tu abbia fatto degli errori, premere start per riprovare'
-      );
-    }
+    alert('Complimenti hai digitato ' + this.counter + ' in un minuto');
     this.quote = '';
     this.input.nativeElement.value = '';
   }
 
   checkPhrase() {
-    this.counter = 0;
-    var arr1 = this.phrase.split(' ');
-    var arr2 = this.quote.split(' ');
-    for (var i = 0; i < arr1.length; i++) {
-      if (arr1[i] == arr2[i]) {
-        this.counter++;
-        console.log(this.counter);
+    let temp = 0;
+    let arr1 = this.phrase.split(' ');
+    let arr2 = this.quote.split(' ');
+    for (let i = 0; i < arr1.length; i++) {
+      for (let j = 0; j < arr2.length; j++) {
+        if (arr1[i] == arr2[j]) {
+          temp++;
+          console.log(temp);
+        }
       }
     }
-    if (this.counter == arr2.length) {
-      this.onFinish();
+    if (arr1.length == arr2.length + 1) {
+      this.counter += temp;
+      this.onStart();
     }
   }
 
@@ -87,6 +89,17 @@ export class GameComponent implements OnInit, AfterViewInit, OnDestroy {
     this.quote = '';
     if (this.theme === this.light) this.theme = this.dark;
     else this.theme = this.light;
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        clearInterval(this.interval);
+        this.onFinish();
+      }
+    }, 1000);
   }
 
   ngOnDestroy() {
